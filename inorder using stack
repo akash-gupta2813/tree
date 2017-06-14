@@ -1,0 +1,57 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+
+struct tnode{
+  int data;
+  struct tnode *left;
+  struct tnode *right;
+};
+
+void inorder(struct tnode *root){
+  struct tnode *current=root;
+  vector<struct tnode *> v;
+
+  while(1){
+     if(current!=NULL){
+     v.push_back(current);
+     current=current->left;
+     }
+
+     else{
+     if(!v.empty()){
+      current=v.back();
+      cout<<current->data<<" ";
+      v.pop_back();
+      current=current->right;
+     }
+
+      else
+      break;
+    }
+  }
+
+}
+
+struct tnode* newnode(int data)
+{
+  struct tnode* tnode = (struct tnode*)
+                       malloc(sizeof(struct tnode));
+  tnode->data = data;
+  tnode->left = NULL;
+  tnode->right = NULL;
+
+}
+
+int main(){
+  struct tnode *root=NULL ;
+
+  root=newnode(1);
+  root->left=newnode(2);
+  root->right=newnode(3);
+  root->left->left=newnode(4);
+  root->left->right= newnode(5);
+
+  inorder(root);
+ return 0;
+}
