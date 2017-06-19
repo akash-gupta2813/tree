@@ -1,0 +1,53 @@
+
+bool isCompleteBT(struct node* root)
+{
+  // Base Case: An empty tree is complete Binary Tree
+  if (root == NULL)
+    return true;
+ 
+  // Create an empty queue
+  int rear, front;
+  struct node **queue = createQueue(&front, &rear);
+ 
+  // Create a flag variable which will be set true
+  // when a non full node is seen
+  bool flag = false;
+ 
+  // Do level order traversal using queue.
+  enQueue(queue, &rear, root);
+  while(!isQueueEmpty(&front, &rear))
+  {
+    struct node *temp_node = deQueue(queue, &front);
+ 
+    /* Check if left child is present*/
+    if(temp_node->left)
+    {
+       // If we have seen a non full node, and we see a node
+       // with non-empty left child, then the given tree is not
+       // a complete Binary Tree
+       if (flag == true)
+         return false;
+ 
+       enQueue(queue, &rear, temp_node->left);  // Enqueue Left Child
+    }
+    else // If this a non-full node, set the flag as true
+       flag = true;
+ 
+    /* Check if right child is present*/
+    if(temp_node->right)
+    {
+       // If we have seen a non full node, and we see a node
+       // with non-empty right child, then the given tree is not
+       // a complete Binary Tree
+       if(flag == true)
+         return false;
+ 
+       enQueue(queue, &rear, temp_node->right);  // Enqueue Right Child
+    }
+    else // If this a non-full node, set the flag as true
+       flag = true;
+  }
+ 
+  // If we reach here, then the tree is complete Bianry Tree
+  return true;
+}
