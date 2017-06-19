@@ -1,0 +1,33 @@
+
+#include <iostream>
+using namespace std;
+
+boolean rootleafsum(struct node *root,int sum,list<result> res){
+     if(root==NULL)
+     return false;
+     
+     if(root->left==NULL && root->right==NULL){
+         if(root->data==sum){
+             res.add(root->data);
+             return true;
+         }
+         return true;
+         else
+         return false;
+     }
+    
+    if(root->left,sum-root->data,res){
+        res.add(root->data);
+        return true;
+    }
+    
+     if(root->right,sum-root->data,res){
+        res.add(root->data);
+        return true;
+    }
+    
+    return false;
+}
+
+i
+
